@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a679e32d9d99e4a9fff3c9c9bfc5d9, type: 3}
+  m_Name: Elon3
+  m_EditorClassIdentifier: 
+  name: Felon Busk
+  sprite: {fileID: 21300000, guid: 202948ae848bd9a4bac0124735fea300, type: 3}
+  sentences:
+  - Aight lets ged to work!
+  next: {fileID: 11400000, guid: bc309e802e11e8f4d975df0b16cc6322, type: 2}

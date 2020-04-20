@@ -19,24 +19,26 @@ public class ShopItem : MonoBehaviour
 
     public int id = -1;
     public string description;
+    public double cps;
 
     // Start is called before the first frame update
     public void SetItem(Placeable p)
     {
         name.text = p.stats.name;
+        cps = p.stats.virgincps;
         amount.text = p.stats.count.ToString();
         cost.text = p.stats.curcost.ToString("F2");
         id = p.stats.id;
         img.sprite = p.gameObject.GetComponent<SpriteRenderer>().sprite;
         int idx = id;
         description = p.stats.description + "\n\nClick or Press " + (idx+1).ToString() + " to purchase";
-        Debug.Log(idx);
+
         btn.onClick.AddListener(() => GameManager.instance.CreatePreviewMeuble(idx));
 
 
         EventTrigger.Entry entry = new EventTrigger.Entry();
         entry.eventID = EventTriggerType.PointerEnter;
-        entry.callback.AddListener((eventData) => { GameManager.instance.ToggleShopTooltip(description); });
+        entry.callback.AddListener((eventData) => { GameManager.instance.ToggleShopTooltip(cps.ToString() + "per second\n\n" +description); });
         trigger.triggers.Add(entry);
 
         entry = new EventTrigger.Entry();

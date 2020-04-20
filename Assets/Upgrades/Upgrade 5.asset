@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7731435d62011974caa0e3815cb0d397, type: 3}
+  m_Name: Upgrade 5
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 817848112605058288, guid: 84140b496cab20b42ae03d35e98800c5, type: 3}
+  name: p power
+  description: POWERFULL
+  effect:
+    prefabAffected: {fileID: 0}
+    improvement: 0.01
+    name: Just the tip
+  id: 4

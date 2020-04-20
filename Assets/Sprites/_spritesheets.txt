@@ -1,0 +1,2 @@
+fotocopier.png,600,800,8
+upgrades.png,100,100,24

@@ -23,8 +23,11 @@ public class Placeable : MonoBehaviour
     public List<Effect> incomingEffects;
 
     public double cps;
+    public double fullcps;
 
     public float sellprice;
+
+    public List<GlobEffect>  globEffects;
     
 
 
@@ -107,10 +110,22 @@ public class Placeable : MonoBehaviour
 
         MoneyManager.instance.rawCPS += cps;
 
-        objm.curcost = objm.basecost * objm.priceMultiplier;
+        
 
         //because off effects
         //RecalculateCps();
+
+        //add global effects from previous upgrades
+        foreach(GlobEffect globeff in UpgradeManager.instance.globEffects)
+        {
+            if (globeff.prefabAffected == null || globeff.prefabAffected == stats.prefab)
+            {
+                globEffects.Add(globeff);
+
+                //recalculate effects
+                ApplyGlobalEffects();
+            }
+        }
     }
 
     public void RecalculateCps()
@@ -137,9 +152,23 @@ public class Placeable : MonoBehaviour
             }
         }
 
+       
+
         MoneyManager.instance.rawCPS += cps;
     }
 
+    public void ApplyGlobalEffects()
+    {
+        MoneyManager.instance.rawCPS -= cps;
+        fullcps = cps;
+        foreach (var eff in globEffects)
+        {
+            fullcps = fullcps *(1+ eff.improvement);
+
+        }
+
+        MoneyManager.instance.rawCPS += fullcps;
+    }
 
     void OnMouseDown()
     {

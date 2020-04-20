@@ -108,7 +108,7 @@ MonoBehaviour:
     clickMoney: 1
     basecost: 1
     curcost: 1
-    priceMultiplier: 1.17
+    priceMultiplier: 2
     sellingPercent: 0.7
   outgoingEffects: []
   originalColor: {r: 0, g: 0, b: 0, a: 0}
@@ -116,7 +116,9 @@ MonoBehaviour:
   reldragpos: {x: 0, y: 0, z: 0}
   incomingEffects: []
   cps: 0
+  fullcps: 0
   sellprice: 0
+  globEffects: []
 --- !u!61 &7372425838394206078
 BoxCollider2D:
   m_ObjectHideFlags: 0

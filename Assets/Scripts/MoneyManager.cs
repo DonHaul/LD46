@@ -16,6 +16,8 @@ public class MoneyManager : MonoBehaviour
 
     public float updateTime=1;
 
+    public float globalMultiplier = 1;
+
     string[] sizes = { "", "Milion", "Trilion", "Quintillion", "Septillion","Nonillion","to much illion" };
 
     private void Awake()

@@ -48,7 +48,7 @@ public class Tooltip : MonoBehaviour
         {
             fx.text = "";
         }
-        if(p.incomingEffects.Count>0)
+        if(p.incomingEffects.Count > 0 && p.globEffects.Count > 0)
         {
             bonuses.gameObject.SetActive(true);
         }else
@@ -72,6 +72,20 @@ public class Tooltip : MonoBehaviour
 
            
         }
+
+
+        foreach (var e in p.globEffects)
+        {
+
+            GameObject go = Instantiate(bonusFab, transform.GetChild(0));
+
+            
+            go.GetComponent<Text>().text = " " + "+" + (e.improvement*100).ToString() + "% from the \"" + e.name + "\" Upgrade";
+            createdBonuses.Add(go);
+
+
+        }
+
 
         LayoutRebuilder.ForceRebuildLayoutImmediate(transform.GetComponent<RectTransform>());
     }

@@ -40,6 +40,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Scene
+    uniqueID: 1374115247
+    locked: 0
   - name: Background
     uniqueID: 3108590795
     locked: 0

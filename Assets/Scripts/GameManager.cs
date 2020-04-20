@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     public bool update=false;
 
+    public Text toolmodetext;
 
     public Vector3 mouseprevpos;
     public Vector3 mousepos;
@@ -52,6 +53,8 @@ public class GameManager : MonoBehaviour
     public Transform map;
 
     public GameObject manualgo;
+
+    public List<ShopItem> shopitems;
 
     // Start is called before the first frame update
     void Start()
@@ -92,12 +95,16 @@ public class GameManager : MonoBehaviour
         //generate shop
         foreach (var item in prefabs)
         {
-            Debug.Log("New Item");
+
             GameObject go = Instantiate(shopItemFab, shopContainer.transform);
             go.GetComponent<ShopItem>().SetItem(item.GetComponent<Placeable>());
+
+            shopitems.Add(go.GetComponent<ShopItem>());
         }
 
         cam = Camera.main;
+
+        //generate upgrades
         
     }
 
@@ -141,11 +148,16 @@ public class GameManager : MonoBehaviour
 
             meubles.Add(placeab);
             objArr[idx].count++;
+            
             object2place = null;
 
             placeab.Configure(objArr[idx]);
 
+            objArr[idx].curcost = objArr[idx].curcost * objArr[idx].priceMultiplier;
+
             update = true;
+
+            shopitems[idx].UpdateItem(objArr[idx]);
 
         }
         else
@@ -154,6 +166,11 @@ public class GameManager : MonoBehaviour
             Destroy(object2place);
         }
 
+    }
+
+    private void FixedUpdate()
+    {
+        toolmodetext.text = mode.ToString();
     }
 
     private void LateUpdate()
@@ -181,7 +198,13 @@ public class GameManager : MonoBehaviour
             m.RecalculateCps();
 
         }
-        
+
+        foreach (var m in meubles)
+        {
+            m.ApplyGlobalEffects();
+
+        }
+       
     }
 
    
@@ -193,14 +216,23 @@ public class GameManager : MonoBehaviour
 
         MoneyManager.instance.rawCPS -= plac.cps;
         objArr[plac.stats.id].count--;
-        //remove self
-        
+
+
+        //rollback price
+        objArr[plac.stats.id].curcost = objArr[plac.stats.id].curcost / objArr[plac.stats.id].priceMultiplier;
+
+
+            //remove self
+
         meubles.Remove(plac);
 
         Destroy(plac.gameObject);
         //recalculate others
         update = true;
+        tooltip.gameObject.SetActive(false);
 
+
+        shopitems[plac.stats.id].UpdateItem(plac.stats);
 
 
     }
@@ -328,6 +360,10 @@ public class GameManager : MonoBehaviour
         }
         if(Input.GetMouseButtonDown(1))
         {
+            //hide all tooltips
+            FloorUnlockManager.instance.purchaseTooltip.SetActive(false);
+            //tooltip.gameObject.SetActive(false);
+
             mouseposb4drag = mousepos;
         }
        if( Input.GetMouseButton(1))
